@@ -1,0 +1,36 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat", "helvetica", sans-serif;
+  box-sizing: border-box;
+}
+
+header {
+  color: white;
+  background-color: black;
+}
+
+.header {
+  padding-left: 25px;
+}
+
+.smalCard {
+  background-color: rgb(246, 244, 244);
+}
+.loan {
+  background: green;
+}
+.bank {
+  background: yellow;
+}
+.work {
+  background: blue;
+}
+
+.bigCard {
+  background-color: gray 0.8;
+}
+
+.buy {
+  background: lightblue;
+}
