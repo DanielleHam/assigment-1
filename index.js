@@ -2,10 +2,14 @@ window.onload = function () {
   getComputers();
 };
 
+let allComputers;
+
 async function getComputers() {
   let computers = await fetch(
     "https://hickory-quilled-actress.glitch.me/computers"
-  ).then((response) => response.json());
+  )
+    .then((response) => response.json())
+    .then((data) => (allComputers = data));
 
   let options = "";
 
@@ -19,5 +23,10 @@ async function getComputers() {
   document.getElementById("computerName").innerHTML = options;
 
   console.log(computers);
+
   return computers;
+}
+
+function buy() {
+  console.log(allComputers);
 }

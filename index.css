@@ -14,21 +14,35 @@ header {
   padding-left: 25px;
 }
 
-.smalCard {
-  background-color: rgb(246, 244, 244);
+.smalCards {
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
 }
-.loan {
-  background: green;
+
+.text {
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
 }
-.bank {
-  background: yellow;
+
+#footer1 {
+  text-align: center;
 }
-.work {
-  background: blue;
+
+#footer2 {
+  display: flex;
+  justify-content: space-around;
 }
 
 .bigCard {
-  background-color: gray 0.8;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 25px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .buy {

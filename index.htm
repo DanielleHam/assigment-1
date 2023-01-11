@@ -18,37 +18,62 @@
       <h1 class="header">Computer store</h1>
     </header>
     <main class="container mt-5">
-      <div class="row">
-        <div class="card" style="width: 18rem">
+      <div class="card-deck">
+        <div class="card border-white bg-light">
           <div class="card-body">
             <h5 class="card-title">Joe Banker</h5>
-
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <span class="row text">
+              <p class="card-text">Balance</p>
+              <p class="card-text">200 kr</p>
+            </span>
+          </div>
+          <div class="card-footer bg-transparent border-light" id="footer1">
+            <button type="button" class="btn btn-success">Get a loan</button>
           </div>
         </div>
-        <div class="smalCard col-sm-4">
-          <h1>Joe Banker</h1>
-          <button type="button" class="btn btn-success">Get a loan</button>
+
+        <div class="card border-white bg-light">
+          <div class="card-body">
+            <h5 class="card-title">Work</h5>
+
+            <span class="row text">
+              <p class="card-text">Pay</p>
+              <p class="card-text">0 kr</p>
+            </span>
+          </div>
+          <div class="card-footer bg-transparent border-light" id="footer2">
+            <button type="button" class="btn btn-warning">Bank</button>
+            <button type="button" class="btn btn-primary">Work</button>
+          </div>
         </div>
-        <div class="smalCard col-sm-4">
-          <h1>Work</h1>
-          <button type="button" class="btn btn-warning">Bank</button>
-          <button type="button" class="btn btn-primary">Work</button>
-        </div>
-        <div class="smalCard col-sm-4">
-          <h1>Laptops</h1>
-          <select class="form-control" id="computerName">
-            <option>Default select</option>
-          </select>
+
+        <div class="card border-white bg-light">
+          <div class="card-body">
+            <h5 class="card-title">Laptops</h5>
+
+            <p class="card-text">
+              <select class="form-control" id="computerName"></select>
+            </p>
+            <p class="card-subtitle">Features:</p>
+            <p class="card-text" id="features"></p>
+          </div>
         </div>
       </div>
-      <div class="bigCard">
-        <button class="buy"></button>
+
+      <div class="bigCard row bg-light border-light">
+        <div>
+          <img src="" alt="computer img" />
+        </div>
+        <div>
+          <h2>computer name</h2>
+          <p>Lorem ipsum!</p>
+        </div>
+        <div>
+          <p>Prise</p>
+          <button type="button" class="btn btn-info" onClick="buy()">
+            Buy
+          </button>
+        </div>
       </div>
     </main>
     <script src="index.js" type="text/javascript"></script>
