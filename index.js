@@ -27,6 +27,21 @@ async function getComputers() {
   return computers;
 }
 
+function features() {
+  let selected = document.querySelector("#computerName");
+  let output = selected.value;
+
+  let thisComputer = allComputers.find((x) => x.id == output);
+
+  let texten = "";
+
+  thisComputer.specs.forEach((text, index) => {
+    texten += text + "\n";
+  });
+
+  document.getElementById("features").innerText = texten;
+}
+
 function buy() {
   console.log(allComputers);
 }
