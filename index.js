@@ -3,7 +3,8 @@ window.onload = function () {
 };
 
 let allComputers;
-let balance = 200;
+let chosenComputer;
+let balance = 0;
 let salary = 0;
 let loan = 0;
 
@@ -24,6 +25,10 @@ async function getComputers() {
   }
 
   document.getElementById("computerName").innerHTML = options;
+  document.getElementById("balance").innerText =
+    Intl.NumberFormat().format(balance);
+  document.getElementById("workPay").innerText =
+    Intl.NumberFormat().format(salary);
 
   return computers;
 }
@@ -40,6 +45,7 @@ function features() {
   let output = selected.value;
 
   let thisComputer = allComputers.find((x) => x.id == output);
+  chosenComputer = thisComputer;
 
   let featuresText = "";
 
@@ -59,5 +65,21 @@ function features() {
 }
 
 function buy() {
-  console.log(allComputers);
+  if (balance === chosenComputer.price) {
+    console.log("köp");
+
+    balance = balance - chosenComputer.price;
+    document.getElementById("balance").innerText = balance;
+
+    let alert = `<div class="alert alert-success" role="alert">You have bought a new laptop!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>`;
+    document.getElementById("alert").innerHTML = alert;
+  } else {
+    let alert = `<div class="alert alert-danger" role="alert">the computer is to expensive<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>`;
+    document.getElementById("alert").innerHTML = alert;
+    console.log("to expencive");
+  }
 }
