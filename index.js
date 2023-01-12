@@ -3,6 +3,9 @@ window.onload = function () {
 };
 
 let allComputers;
+let balance = 200;
+let salary = 0;
+let loan = 0;
 
 async function getComputers() {
   let computers = await fetch(
@@ -25,6 +28,13 @@ async function getComputers() {
   return computers;
 }
 
+function work() {
+  salary = salary + 100;
+
+  document.getElementById("workPay").innerText =
+    Intl.NumberFormat().format(salary);
+}
+
 function features() {
   let selected = document.querySelector("#computerName");
   let output = selected.value;
@@ -40,7 +50,9 @@ function features() {
   document.getElementById("features").innerText = featuresText;
   document.getElementById("nameOfComputer").innerText = thisComputer.title;
   document.getElementById("description").innerText = thisComputer.description;
-  document.getElementById("price").innerText = thisComputer.price;
+  document.getElementById("price").innerText = Intl.NumberFormat().format(
+    thisComputer.price
+  );
   document.getElementById(
     "image"
   ).innerHTML = `<img src="https://hickory-quilled-actress.glitch.me/${thisComputer.image}" alt=${thisComputer.title} /> `;
