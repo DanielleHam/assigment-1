@@ -36,6 +36,7 @@ header {
 }
 
 .bigCard {
+  display: flex;
   justify-content: space-around;
   align-items: center;
   margin-top: 25px;
@@ -43,6 +44,16 @@ header {
   margin-right: 0px !important;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+#image {
+  width: 20%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#image img {
+  width: 100%;
 }
 
 .buy {
