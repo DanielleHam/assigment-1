@@ -58,14 +58,38 @@ const getALoan = () => {
 
   document.getElementById("repayLoanButton").style.display = "block";
   document.getElementById("modal").style.display = "none";
-  let loanHTML = `<p class="card-text">Loan</p>
-              <p class="card-text"><span id="LoanBalance"></span> kr</p>`;
 
-  document.getElementById("loanSum").innerHTML = loanHTML;
+  document.getElementById("loanSum").style.display = "flex";
   document.getElementById("LoanBalance").innerText =
     Intl.NumberFormat().format(loan);
   document.getElementById("balance").innerText =
     Intl.NumberFormat().format(balance);
+};
+
+const repayLoan = () => {
+  if (salary === 0) {
+    alert("you have to work some first");
+  } else if (loan <= salary) {
+    let left = salary - loan;
+    loan = 0;
+    salary = 0;
+    balance = balance + left;
+    document.getElementById("LoanBalance").innerText =
+      Intl.NumberFormat().format(loan);
+    document.getElementById("workPay").innerText =
+      Intl.NumberFormat().format(salary);
+    document.getElementById("balance").innerText =
+      Intl.NumberFormat().format(balance);
+    document.getElementById("loanSum").style.display = "none";
+  } else if (salary < loan) {
+    loan = loan - salary;
+    salary = 0;
+
+    document.getElementById("LoanBalance").innerText =
+      Intl.NumberFormat().format(loan);
+    document.getElementById("workPay").innerText =
+      Intl.NumberFormat().format(salary);
+  }
 };
 
 const bank = () => {
@@ -74,7 +98,7 @@ const bank = () => {
   if (loan > 0) {
     if (loan >= part) {
       loan = loan - part;
-      console.log("loanleft", loan);
+
       let left = salary - part;
       balance = balance + left;
       document.getElementById("balance").innerText =
@@ -147,8 +171,6 @@ const features = () => {
 
 const buy = () => {
   if (balance === chosenComputer.price) {
-    console.log("köp");
-
     balance = balance - chosenComputer.price;
     document.getElementById("balance").innerText =
       Intl.NumberFormat().format(balance);

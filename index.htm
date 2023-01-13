@@ -26,7 +26,10 @@
               <p class="card-text">total Balance</p>
               <p class="card-text"><span id="balance"></span> kr</p>
             </span>
-            <span class="row text" id="loanSum"> </span>
+            <span class="row text" id="loanSum">
+              <p class="card-text">Loan</p>
+              <p class="card-text"><span id="LoanBalance"></span> kr</p>
+            </span>
           </div>
           <div class="card-footer bg-transparent border-light" id="footer1">
             <button
@@ -44,6 +47,7 @@
               class="btn btn-danger"
               style="display: none"
               id="repayLoanButton"
+              onclick="repayLoan()"
             >
               Repay loan
             </button>

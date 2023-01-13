@@ -36,6 +36,10 @@ header {
   justify-content: space-around;
 }
 
+#loanSum {
+  display: none;
+}
+
 .bigCard {
   display: flex;
   justify-content: space-around;
