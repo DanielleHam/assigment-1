@@ -53,6 +53,7 @@ const closeLoanModal = () => {
 
 const getALoan = () => {
   let loanSum = document.getElementById("askedLoan").value;
+  document.getElementById("askedLoan").value = "";
   loan = Number(loanSum);
   balance = balance + loan;
 
@@ -81,6 +82,8 @@ const repayLoan = () => {
     document.getElementById("balance").innerText =
       Intl.NumberFormat().format(balance);
     document.getElementById("loanSum").style.display = "none";
+    document.getElementById("repayLoanButton").style.display = "none";
+    document.getElementById("modal").style.display = "block";
   } else if (salary < loan) {
     loan = loan - salary;
     salary = 0;

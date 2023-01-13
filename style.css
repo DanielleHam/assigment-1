@@ -40,6 +40,10 @@ header {
   display: none;
 }
 
+#features {
+  font-size: smaller;
+}
+
 .bigCard {
   display: flex;
   justify-content: space-around;
