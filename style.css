@@ -10,6 +10,10 @@ header {
   background-color: black;
 }
 
+#buyPart {
+  display: none;
+}
+
 .header {
   padding-left: 25px;
 }

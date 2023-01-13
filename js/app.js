@@ -9,52 +9,59 @@ let salary = 0;
 let loan = 0;
 
 async function getComputers() {
-  let computers = await fetch(
-    "https://hickory-quilled-actress.glitch.me/computers"
-  )
-    .then((response) => response.json())
-    .then((data) => (allComputers = data));
+  let res = await fetch("https://hickory-quilled-actress.glitch.me/computers");
 
-  let options = `<option value="">Select</option>`;
+  let computers = await res.json();
+  allComputers = computers; // put all the fetched computers to a global variable
+  //set a variable for the HTML to insert
+  let options = "";
 
   for (let computer of computers) {
     let title = computer.title;
     let id = computer.id;
-
+    // crate an option element for each computer
     options += `<option value="${id}">${title}</option>`;
   }
-
+  // add the options to the select
   document.getElementById("computerName").innerHTML = options;
+  // add the base balance to html
   document.getElementById("balance").innerText =
     Intl.NumberFormat().format(balance);
+  //add base salary to html
   document.getElementById("workPay").innerText =
     Intl.NumberFormat().format(salary);
+  // call the function to add the information abut the computer
+  features();
 
   return computers;
 }
 
 const checkLoan = () => {
+  // get the input from user
   let loanSum = document.getElementById("askedLoan").value;
-
+  // check if input is more then double the balance
   if (loanSum > balance * 2) {
+    // if it is you can't take a loan
     alert(
       "to high loan. can only be 2 times the amount on balance. so no higher then " +
         balance * 2
     );
+    //take away to get loan button in the modal so user can't press it
     document.getElementById("getLoanButton").style.display = "none";
   } else {
+    // display the button for user to apply for a loan
     document.getElementById("getLoanButton").style.display = "block";
   }
 };
 
-const closeLoanModal = () => {
-  document.getElementById("getLoanButton").style.display = "block";
-};
-
 const getALoan = () => {
+  // get the value the user puts in for the desired amount
   let loanSum = document.getElementById("askedLoan").value;
+  //reset the input after
   document.getElementById("askedLoan").value = "";
+  //set the loan to the desired amount
   loan = Number(loanSum);
+  //add the loan to the balance
   balance = balance + loan;
 
   document.getElementById("repayLoanButton").style.display = "block";
@@ -121,7 +128,7 @@ const bank = () => {
 
       document.getElementById("balance").innerText =
         Intl.NumberFormat().format(balance);
-      document.getElementById("lone").innerText =
+      document.getElementById("LoanBalance").innerText =
         Intl.NumberFormat().format(loan);
       salary = 0;
       document.getElementById("workPay").innerText =
@@ -149,10 +156,9 @@ const work = () => {
 };
 
 const features = () => {
-  let selected = document.querySelector("#computerName");
-  let output = selected.value;
+  let selected = document.querySelector("#computerName").value;
 
-  let thisComputer = allComputers.find((x) => x.id == output);
+  let thisComputer = allComputers.find((x) => x.id == selected);
   chosenComputer = thisComputer;
 
   let featuresText = "";
@@ -162,6 +168,7 @@ const features = () => {
   });
 
   document.getElementById("features").innerText = featuresText;
+  document.getElementById("buyPart").style.display = "block";
   document.getElementById("nameOfComputer").innerText = thisComputer.title;
   document.getElementById("description").innerText = thisComputer.description;
   document.getElementById("price").innerText = Intl.NumberFormat().format(
@@ -169,11 +176,11 @@ const features = () => {
   );
   document.getElementById(
     "image"
-  ).innerHTML = `<img src="https://hickory-quilled-actress.glitch.me/${thisComputer.image}" alt=${thisComputer.title} /> `;
+  ).innerHTML = `<img src="https://hickory-quilled-actress.glitch.me/${thisComputer.image}" alt="${thisComputer.title}" /> `;
 };
 
 const buy = () => {
-  if (balance === chosenComputer.price) {
+  if (balance > chosenComputer.price) {
     balance = balance - chosenComputer.price;
     document.getElementById("balance").innerText =
       Intl.NumberFormat().format(balance);

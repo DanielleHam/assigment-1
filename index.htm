@@ -23,7 +23,7 @@
           <div class="card-body">
             <h5 class="card-title">Joe Banker</h5>
             <span class="row text">
-              <p class="card-text">total Balance</p>
+              <p class="card-text">Total Balance</p>
               <p class="card-text"><span id="balance"></span> kr</p>
             </span>
             <span class="row text" id="loanSum">
@@ -72,7 +72,6 @@
                     class="close"
                     data-dismiss="modal"
                     aria-label="Close"
-                    onclick="closeLoanModal()"
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -93,7 +92,6 @@
                     type="button"
                     class="btn btn-secondary"
                     data-dismiss="modal"
-                    onclick="closeLoanModal()"
                   >
                     Close
                   </button>
@@ -154,7 +152,7 @@
           <h2 id="nameOfComputer"></h2>
           <p id="description"></p>
         </div>
-        <div>
+        <div id="buyPart">
           <p><span id="price"></span> Sek</p>
           <button type="button" class="btn btn-info" onClick="buy()">
             Buy
