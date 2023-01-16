@@ -110,53 +110,57 @@ const repayLoan = () => {
 };
 
 const bank = () => {
-  let deductedSalaryAmount = salary * 0.1;
-
-  if (loan > 0) {
-    if (loan > deductedSalaryAmount) {
-      loan = loan - deductedSalaryAmount;
-
-      let left = salary - deductedSalaryAmount;
-      balance = balance + left;
-      document.getElementById("balance").innerText =
-        Intl.NumberFormat().format(balance);
-      document.getElementById("LoanBalance").innerText =
-        Intl.NumberFormat().format(loan);
-
-      salary = 0;
-      document.getElementById("workPay").innerText =
-        Intl.NumberFormat().format(salary);
-    } else if (loan <= deductedSalaryAmount) {
-      let sumLeftAfterRepay = deductedSalaryAmount - loan;
-      let salaryLeft = salary - deductedSalaryAmount;
-      lone = 0;
-
-      balance = balance + sumLeftAfterRepay + salaryLeft;
-
-      document.getElementById("balance").innerText =
-        Intl.NumberFormat().format(balance);
-      document.getElementById("LoanBalance").innerText =
-        Intl.NumberFormat().format(loan);
-
-      salary = 0;
-      document.getElementById("workPay").innerText =
-        Intl.NumberFormat().format(salary);
-
-      // remove the loan text
-      document.getElementById("loanSum").style.display = "none";
-      // remove the repay loan button
-      document.getElementById("repayLoanButton").style.display = "none";
-      // show the get a loan button
-      document.getElementById("modal").style.display = "block";
-    }
+  if (salary === 0) {
+    alert("you have to work some first");
   } else {
-    balance = balance + salary;
-    document.getElementById("balance").innerText =
-      Intl.NumberFormat().format(balance);
+    let deductedSalaryAmount = salary * 0.1;
 
-    salary = 0;
-    document.getElementById("workPay").innerText =
-      Intl.NumberFormat().format(salary);
+    if (loan > 0) {
+      if (loan > deductedSalaryAmount) {
+        loan = loan - deductedSalaryAmount;
+
+        let left = salary - deductedSalaryAmount;
+        balance = balance + left;
+        document.getElementById("balance").innerText =
+          Intl.NumberFormat().format(balance);
+        document.getElementById("LoanBalance").innerText =
+          Intl.NumberFormat().format(loan);
+
+        salary = 0;
+        document.getElementById("workPay").innerText =
+          Intl.NumberFormat().format(salary);
+      } else if (loan <= deductedSalaryAmount) {
+        let sumLeftAfterRepay = deductedSalaryAmount - loan;
+        let salaryLeft = salary - deductedSalaryAmount;
+        lone = 0;
+
+        balance = balance + sumLeftAfterRepay + salaryLeft;
+
+        document.getElementById("balance").innerText =
+          Intl.NumberFormat().format(balance);
+        document.getElementById("LoanBalance").innerText =
+          Intl.NumberFormat().format(loan);
+
+        salary = 0;
+        document.getElementById("workPay").innerText =
+          Intl.NumberFormat().format(salary);
+
+        // remove the loan text
+        document.getElementById("loanSum").style.display = "none";
+        // remove the repay loan button
+        document.getElementById("repayLoanButton").style.display = "none";
+        // show the get a loan button
+        document.getElementById("modal").style.display = "block";
+      }
+    } else {
+      balance = balance + salary;
+      document.getElementById("balance").innerText =
+        Intl.NumberFormat().format(balance);
+
+      salary = 0;
+      document.getElementById("workPay").innerText =
+        Intl.NumberFormat().format(salary);
+    }
   }
 };
 
