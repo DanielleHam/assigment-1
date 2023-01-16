@@ -40,31 +40,6 @@ const getComputers = async () => {
   } catch (error) {
     return error;
   }
-  let res = await fetch("https://hickory-quilled-actress.glitch.me/computers");
-
-  let computers = await res.json();
-  allComputers = computers; // put all the fetched computers to a global variable
-  //set a variable for the HTML to insert
-  let options = "";
-
-  for (let computer of computers) {
-    let title = computer.title;
-    let id = computer.id;
-    // crate an option element for each computer
-    options += `<option value="${id}">${title}</option>`;
-  }
-  // add the options to the select
-  document.getElementById("computerName").innerHTML = options;
-  // add the base balance to html
-  document.getElementById("balance").innerText =
-    Intl.NumberFormat().format(balance);
-  //add base salary to html
-  document.getElementById("workPay").innerText =
-    Intl.NumberFormat().format(salary);
-  // call the function to add the information about the computer
-  features();
-
-  return computers;
 };
 
 const checkLoan = () => {
@@ -183,9 +158,6 @@ const bank = () => {
     document.getElementById("workPay").innerText =
       Intl.NumberFormat().format(salary);
   }
-
-  // om lån är mer än 10% av lön. sänk summan på lån ohc resterande in på balanse
-  // om låner är mindre än 10% av lön ta ort lån från lön och nolla lånert
 };
 
 const work = () => {
