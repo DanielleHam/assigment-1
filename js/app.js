@@ -223,7 +223,7 @@ const features = async () => {
   let res = await fetch(
     `https://hickory-quilled-actress.glitch.me/${selectedComputer.image}`
   );
-  console.log(res);
+
   if (res.status != 404) {
     let img = res.url;
 
@@ -231,11 +231,10 @@ const features = async () => {
       "image"
     ).innerHTML = `<img src=${img} alt="${selectedComputer.title}" /> `;
   } else {
-    let img = 
-
+    // if not add a placeholder picture
     document.getElementById(
       "image"
-    ).innerHTML = `<img src=${img} alt="${selectedComputer.title}" /> `;
+    ).innerHTML = `<img src="no-image-icon.png" alt="${selectedComputer.title}" /> `;
   }
 };
 
