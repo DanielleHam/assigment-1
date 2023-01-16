@@ -194,10 +194,14 @@ const features = async () => {
     selectedComputer.price
   );
 
-  // se if image exist
+  await getPicture(selectedComputer);
+};
+
+const getPicture = async (computer) => {
+  // se if image link works
 
   let res = await fetch(
-    `https://hickory-quilled-actress.glitch.me/${selectedComputer.image}`
+    `https://hickory-quilled-actress.glitch.me/${computer.image}`
   );
 
   if (res.ok) {
@@ -205,30 +209,30 @@ const features = async () => {
 
     document.getElementById(
       "image"
-    ).innerHTML = `<img src=${img} alt="${selectedComputer.title}" /> `;
+    ).innerHTML = `<img src=${img} alt="${computer.title}" /> `;
   } else {
     // if img not exist testing to change the ending of the link
-    if (selectedComputer.image.search("jpg") > 0) {
-      let newLinkEnd = selectedComputer.image.replace("jpg", "png");
+    if (computer.image.search("jpg") > 0) {
+      let newLinkEnd = computer.image.replace("jpg", "png");
 
       let res2 = await fetch(
         `https://hickory-quilled-actress.glitch.me/${newLinkEnd}`
       );
       document.getElementById(
         "image"
-      ).innerHTML = `<img src=${res2.url} alt="${selectedComputer.title}" /> `;
+      ).innerHTML = `<img src=${res2.url} alt="${computer.title}" /> `;
       if (res2.ok) {
         document.getElementById(
           "image"
-        ).innerHTML = `<img src=${res2.url} alt="${selectedComputer.title}" /> `;
+        ).innerHTML = `<img src=${res2.url} alt="${computer.title}" /> `;
       } else {
         // if no picture add a placeholder picture
         document.getElementById(
           "image"
-        ).innerHTML = `<img src="no-image-icon.png" alt="${selectedComputer.title}" /> `;
+        ).innerHTML = `<img src="no-image-icon.png" alt="${computer.title}" /> `;
       }
     } else {
-      let newLinkEnd = selectedComputer.image.replace("png", "jpg");
+      let newLinkEnd = computer.image.replace("png", "jpg");
 
       let res3 = await fetch(
         `https://hickory-quilled-actress.glitch.me/${newLinkEnd}`
@@ -236,12 +240,12 @@ const features = async () => {
       if (res3.ok) {
         document.getElementById(
           "image"
-        ).innerHTML = `<img src=${res3.url} alt="${selectedComputer.title}" /> `;
+        ).innerHTML = `<img src=${res3.url} alt="${computer.title}" /> `;
       } else {
         // if no picture add a placeholder picture
         document.getElementById(
           "image"
-        ).innerHTML = `<img src="no-image-icon.png" alt="${selectedComputer.title}" /> `;
+        ).innerHTML = `<img src="no-image-icon.png" alt="${computer.title}" /> `;
       }
     }
   }
