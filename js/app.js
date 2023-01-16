@@ -200,17 +200,50 @@ const features = async () => {
     `https://hickory-quilled-actress.glitch.me/${selectedComputer.image}`
   );
 
-  if (res.status != 404) {
+  if (res.ok) {
     let img = res.url;
 
     document.getElementById(
       "image"
     ).innerHTML = `<img src=${img} alt="${selectedComputer.title}" /> `;
   } else {
-    // if not add a placeholder picture
-    document.getElementById(
-      "image"
-    ).innerHTML = `<img src="no-image-icon.png" alt="${selectedComputer.title}" /> `;
+    // if img not exist testing to change the ending of the link
+    if (selectedComputer.image.search("jpg") > 0) {
+      let newLinkEnd = selectedComputer.image.replace("jpg", "png");
+
+      let res2 = await fetch(
+        `https://hickory-quilled-actress.glitch.me/${newLinkEnd}`
+      );
+      document.getElementById(
+        "image"
+      ).innerHTML = `<img src=${res2.url} alt="${selectedComputer.title}" /> `;
+      if (res2.ok) {
+        document.getElementById(
+          "image"
+        ).innerHTML = `<img src=${res2.url} alt="${selectedComputer.title}" /> `;
+      } else {
+        // if no picture add a placeholder picture
+        document.getElementById(
+          "image"
+        ).innerHTML = `<img src="no-image-icon.png" alt="${selectedComputer.title}" /> `;
+      }
+    } else {
+      let newLinkEnd = selectedComputer.image.replace("png", "jpg");
+
+      let res3 = await fetch(
+        `https://hickory-quilled-actress.glitch.me/${newLinkEnd}`
+      );
+      if (res3.ok) {
+        document.getElementById(
+          "image"
+        ).innerHTML = `<img src=${res3.url} alt="${selectedComputer.title}" /> `;
+      } else {
+        // if no picture add a placeholder picture
+        document.getElementById(
+          "image"
+        ).innerHTML = `<img src="no-image-icon.png" alt="${selectedComputer.title}" /> `;
+      }
+    }
   }
 };
 
