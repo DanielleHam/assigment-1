@@ -19,6 +19,7 @@
     </header>
     <main class="container mt-5">
       <div class="card-deck">
+        <!-- bank card -->
         <div class="card border-white bg-light">
           <div class="card-body">
             <h5 class="card-title">Joe Banker</h5>
@@ -52,19 +53,19 @@
               Repay loan
             </button>
           </div>
-          <!-- modal -->
+          <!-- modal for loan-->
           <div
             class="modal fade"
             id="loanModal"
             tabindex="-1"
             role="dialog"
-            aria-labelledby="exampleModalLabel"
+            aria-labelledby="loanModalLabel"
             aria-hidden="true"
           >
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
+                  <h5 class="modal-title" id="loanModalLabel">
                     Enter Loan sum
                   </h5>
                   <button
@@ -82,7 +83,6 @@
                     type="number"
                     placeholder="Loan sum"
                     id="desiredLoan"
-                    step="10"
                     min="0"
                     oninput="checkLoan()"
                   />
@@ -109,7 +109,7 @@
             </div>
           </div>
         </div>
-
+        <!-- work card -->
         <div class="card border-white bg-light">
           <div class="card-body">
             <h5 class="card-title">Work</h5>
@@ -128,7 +128,7 @@
             </button>
           </div>
         </div>
-
+        <!-- laptop select card -->
         <div class="card border-white bg-light">
           <div class="card-body">
             <h5 class="card-title">Laptops</h5>
@@ -145,7 +145,7 @@
           </div>
         </div>
       </div>
-
+      <!-- laptop information card -->
       <div class="bigCard bg-light border-light">
         <div id="image"></div>
         <div style="width: 50%">

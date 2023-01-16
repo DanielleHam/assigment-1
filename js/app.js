@@ -8,7 +8,7 @@ let balance = 0;
 let salary = 0;
 let loan = 0;
 
-async function getComputers() {
+const getComputers = async () => {
   try {
     let res = await fetch(
       "https://hickory-quilled-actress.glitch.me/computers"
@@ -65,7 +65,7 @@ async function getComputers() {
   features();
 
   return computers;
-}
+};
 
 const checkLoan = () => {
   let desiredLoanSum = document.getElementById("desiredLoan").value;
@@ -195,7 +195,7 @@ const work = () => {
     Intl.NumberFormat().format(salary);
 };
 
-const features = () => {
+const features = async () => {
   let selected = document.querySelector("#computerName").value;
 
   let selectedComputer = allComputers.find((x) => x.id == selected);
@@ -217,9 +217,26 @@ const features = () => {
   document.getElementById("price").innerText = Intl.NumberFormat().format(
     selectedComputer.price
   );
-  document.getElementById(
-    "image"
-  ).innerHTML = `<img src="https://hickory-quilled-actress.glitch.me/${selectedComputer.image}" alt="${selectedComputer.title}" /> `;
+
+  // se if image exist
+
+  let res = await fetch(
+    `https://hickory-quilled-actress.glitch.me/${selectedComputer.image}`
+  );
+  console.log(res);
+  if (res.status != 404) {
+    let img = res.url;
+
+    document.getElementById(
+      "image"
+    ).innerHTML = `<img src=${img} alt="${selectedComputer.title}" /> `;
+  } else {
+    let img = 
+
+    document.getElementById(
+      "image"
+    ).innerHTML = `<img src=${img} alt="${selectedComputer.title}" /> `;
+  }
 };
 
 const buy = () => {
