@@ -9,6 +9,37 @@ let salary = 0;
 let loan = 0;
 
 async function getComputers() {
+  try {
+    let res = await fetch(
+      "https://hickory-quilled-actress.glitch.me/computers"
+    );
+
+    let computers = await res.json();
+    allComputers = computers; // put all the fetched computers to a global variable
+    //set a variable for the HTML to insert
+    let options = "";
+
+    for (let computer of computers) {
+      let title = computer.title;
+      let id = computer.id;
+      // crate an option element for each computer
+      options += `<option value="${id}">${title}</option>`;
+    }
+    // add the options to the select
+    document.getElementById("computerName").innerHTML = options;
+    // add the base balance to html
+    document.getElementById("balance").innerText =
+      Intl.NumberFormat().format(balance);
+    //add base salary to html
+    document.getElementById("workPay").innerText =
+      Intl.NumberFormat().format(salary);
+    // call the function to add the information about the computer
+    features();
+
+    return computers;
+  } catch (error) {
+    return error;
+  }
   let res = await fetch("https://hickory-quilled-actress.glitch.me/computers");
 
   let computers = await res.json();
@@ -30,23 +61,21 @@ async function getComputers() {
   //add base salary to html
   document.getElementById("workPay").innerText =
     Intl.NumberFormat().format(salary);
-  // call the function to add the information abut the computer
+  // call the function to add the information about the computer
   features();
 
   return computers;
 }
 
 const checkLoan = () => {
-  // get the input from user
-  let loanSum = document.getElementById("askedLoan").value;
-  // check if input is more then double the balance
-  if (loanSum > balance * 2) {
-    // if it is you can't take a loan
+  let desiredLoanSum = document.getElementById("desiredLoan").value;
+
+  if (desiredLoanSum > balance * 2) {
     alert(
       "to high loan. can only be 2 times the amount on balance. so no higher then " +
         balance * 2
     );
-    //take away to get loan button in the modal so user can't press it
+    // take away to get a loan button in the modal so user can't press it
     document.getElementById("getLoanButton").style.display = "none";
   } else {
     // display the button for user to apply for a loan
@@ -55,19 +84,19 @@ const checkLoan = () => {
 };
 
 const getALoan = () => {
-  // get the value the user puts in for the desired amount
-  let loanSum = document.getElementById("askedLoan").value;
-  //reset the input after
-  document.getElementById("askedLoan").value = "";
-  //set the loan to the desired amount
-  loan = Number(loanSum);
-  //add the loan to the balance
+  let desiredLoanSum = document.getElementById("desiredLoan").value;
+
+  document.getElementById("desiredLoan").value = "";
+  loan = Number(desiredLoanSum);
   balance = balance + loan;
 
+  // show the repay loan button
   document.getElementById("repayLoanButton").style.display = "block";
+  // remove the get a loan button
   document.getElementById("modal").style.display = "none";
-
+  // show the text with the loan amount
   document.getElementById("loanSum").style.display = "flex";
+
   document.getElementById("LoanBalance").innerText =
     Intl.NumberFormat().format(loan);
   document.getElementById("balance").innerText =
@@ -89,7 +118,10 @@ const repayLoan = () => {
     document.getElementById("balance").innerText =
       Intl.NumberFormat().format(balance);
     document.getElementById("loanSum").style.display = "none";
+
+    // remove the repay loan button
     document.getElementById("repayLoanButton").style.display = "none";
+    // show the get a loan button
     document.getElementById("modal").style.display = "block";
   } else if (salary < loan) {
     loan = loan - salary;
@@ -103,13 +135,13 @@ const repayLoan = () => {
 };
 
 const bank = () => {
-  let part = salary * 0.1;
+  let deductedSalaryAmount = salary * 0.1;
 
   if (loan > 0) {
-    if (loan >= part) {
-      loan = loan - part;
+    if (loan > deductedSalaryAmount) {
+      loan = loan - deductedSalaryAmount;
 
-      let left = salary - part;
+      let left = salary - deductedSalaryAmount;
       balance = balance + left;
       document.getElementById("balance").innerText =
         Intl.NumberFormat().format(balance);
@@ -119,20 +151,28 @@ const bank = () => {
       salary = 0;
       document.getElementById("workPay").innerText =
         Intl.NumberFormat().format(salary);
-    } else if (loan < part) {
-      let loanLeft = part - loan;
-      let salaryLeft = salary - part;
+    } else if (loan <= deductedSalaryAmount) {
+      let sumLeftAfterRepay = deductedSalaryAmount - loan;
+      let salaryLeft = salary - deductedSalaryAmount;
       lone = 0;
 
-      balance = balance + loanLeft + salaryLeft;
+      balance = balance + sumLeftAfterRepay + salaryLeft;
 
       document.getElementById("balance").innerText =
         Intl.NumberFormat().format(balance);
       document.getElementById("LoanBalance").innerText =
         Intl.NumberFormat().format(loan);
+
       salary = 0;
       document.getElementById("workPay").innerText =
         Intl.NumberFormat().format(salary);
+
+      // remove the loan text
+      document.getElementById("loanSum").style.display = "none";
+      // remove the repay loan button
+      document.getElementById("repayLoanButton").style.display = "none";
+      // show the get a loan button
+      document.getElementById("modal").style.display = "block";
     }
   } else {
     balance = balance + salary;
@@ -158,25 +198,28 @@ const work = () => {
 const features = () => {
   let selected = document.querySelector("#computerName").value;
 
-  let thisComputer = allComputers.find((x) => x.id == selected);
-  chosenComputer = thisComputer;
+  let selectedComputer = allComputers.find((x) => x.id == selected);
+  chosenComputer = selectedComputer;
 
   let featuresText = "";
 
-  thisComputer.specs.forEach((text) => {
+  selectedComputer.specs.forEach((text) => {
     featuresText += text + "\n";
   });
 
   document.getElementById("features").innerText = featuresText;
+  // show the buy button and price
   document.getElementById("buyPart").style.display = "block";
-  document.getElementById("nameOfComputer").innerText = thisComputer.title;
-  document.getElementById("description").innerText = thisComputer.description;
+
+  document.getElementById("nameOfComputer").innerText = selectedComputer.title;
+  document.getElementById("description").innerText =
+    selectedComputer.description;
   document.getElementById("price").innerText = Intl.NumberFormat().format(
-    thisComputer.price
+    selectedComputer.price
   );
   document.getElementById(
     "image"
-  ).innerHTML = `<img src="https://hickory-quilled-actress.glitch.me/${thisComputer.image}" alt="${thisComputer.title}" /> `;
+  ).innerHTML = `<img src="https://hickory-quilled-actress.glitch.me/${selectedComputer.image}" alt="${selectedComputer.title}" /> `;
 };
 
 const buy = () => {
@@ -190,7 +233,7 @@ const buy = () => {
   </button></div>`;
     document.getElementById("alert").innerHTML = alert;
   } else {
-    let alert = `<div class="alert alert-danger" role="alert">the computer is to expensive<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    let alert = `<div class="alert alert-danger" role="alert">The computer is to expensive<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button></div>`;
     document.getElementById("alert").innerHTML = alert;

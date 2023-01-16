@@ -1,7 +1,5 @@
-# assigment-1 - computer store 
+# assignment-1 - computer store
 
-the first assigment in Expreise academy to create a computerstore. 
+the first assignment in Expreis academy to create a computer store.
 
- i used Bootstrap as a CSS library. 
- 
- 
+I used Bootstrap as a CSS library.
