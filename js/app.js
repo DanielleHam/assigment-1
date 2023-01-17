@@ -59,23 +59,27 @@ const checkLoan = () => {
 };
 
 const getALoan = () => {
-  let desiredLoanSum = document.getElementById("desiredLoan").value;
+  if (loan > 0) {
+    alert("You already have a loan");
+  } else {
+    let desiredLoanSum = document.getElementById("desiredLoan").value;
 
-  document.getElementById("desiredLoan").value = "";
-  loan = Number(desiredLoanSum);
-  balance = balance + loan;
+    document.getElementById("desiredLoan").value = "";
+    loan = Number(desiredLoanSum);
+    balance = balance + loan;
 
-  // show the repay loan button
-  document.getElementById("repayLoanButton").style.display = "block";
-  // remove the get a loan button
-  document.getElementById("modal").style.display = "none";
-  // show the text with the loan amount
-  document.getElementById("loanSum").style.display = "flex";
+    // show the repay loan button
+    document.getElementById("repayLoanButton").style.display = "block";
+    // remove the get a loan button
+    document.getElementById("modal").style.display = "none";
+    // show the text with the loan amount
+    document.getElementById("loanSum").style.display = "flex";
 
-  document.getElementById("LoanBalance").innerText =
-    Intl.NumberFormat().format(loan);
-  document.getElementById("balance").innerText =
-    Intl.NumberFormat().format(balance);
+    document.getElementById("LoanBalance").innerText =
+      Intl.NumberFormat().format(loan);
+    document.getElementById("balance").innerText =
+      Intl.NumberFormat().format(balance);
+  }
 };
 
 const repayLoan = () => {
